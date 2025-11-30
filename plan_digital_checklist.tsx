@@ -4,14 +4,7 @@ import { Check, Circle, ChevronDown, ChevronRight, RefreshCw } from 'lucide-reac
 import { initializeApp } from 'firebase/app';
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCNsx_lDzNZz4-XXNBCL3l9LvzTKvN8N0c",
-  authDomain: "spotifylyricstranslator.firebaseapp.com",
-  projectId: "spotifylyricstranslator",
-  storageBucket: "spotifylyricstranslator.firebasestorage.app",
-  messagingSenderId: "459157844682",
-  appId: "1:459157844682:web:5f2adf8d72f0e622bffa33"
-};
+import { firebaseConfig } from './firebase-config';
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 // FIN BLOQUE FIREBASE
@@ -181,13 +174,13 @@ const PlanDigitalChecklist = () => {
       locations: data.locations.map(loc =>
         loc.id === locationId
           ? {
-              ...loc,
-              tasks: loc.tasks.map(task =>
-                task.id === taskId
-                  ? { ...task, completed: !task.completed }
-                  : task
-              )
-            }
+            ...loc,
+            tasks: loc.tasks.map(task =>
+              task.id === taskId
+                ? { ...task, completed: !task.completed }
+                : task
+            )
+          }
           : loc
       )
     };
@@ -253,7 +246,7 @@ const PlanDigitalChecklist = () => {
                 <span className="text-sm font-bold">{totalProgress.completed}/{totalProgress.total} tareas</span>
               </div>
               <div className="w-full bg-white/30 rounded-full h-3">
-                <div 
+                <div
                   className="bg-green-400 h-3 rounded-full transition-all duration-500"
                   style={{ width: `${totalProgress.percentage}%` }}
                 />
@@ -269,7 +262,7 @@ const PlanDigitalChecklist = () => {
               const progress = getProgress(location);
               return (
                 <div key={location.id} className="mb-6 last:mb-0">
-                  <div 
+                  <div
                     className="bg-gradient-to-r from-slate-50 to-blue-50 rounded-xl p-4 cursor-pointer hover:shadow-md transition-all"
                     onClick={() => toggleLocation(location.id)}
                   >
@@ -287,7 +280,7 @@ const PlanDigitalChecklist = () => {
                           {progress.completed}/{progress.total}
                         </span>
                         <div className="w-32 bg-slate-200 rounded-full h-2">
-                          <div 
+                          <div
                             className="bg-gradient-to-r from-blue-500 to-indigo-600 h-2 rounded-full transition-all duration-500"
                             style={{ width: `${progress.percentage}%` }}
                           />
@@ -304,11 +297,10 @@ const PlanDigitalChecklist = () => {
                       {location.tasks.map((task) => (
                         <div
                           key={task.id}
-                          className={`flex items-start gap-3 p-4 rounded-lg transition-all cursor-pointer ${
-                            task.completed
+                          className={`flex items-start gap-3 p-4 rounded-lg transition-all cursor-pointer ${task.completed
                               ? 'bg-green-50 border-2 border-green-200'
                               : 'bg-white border-2 border-slate-200 hover:border-blue-300 hover:shadow-sm'
-                          }`}
+                            }`}
                           onClick={() => toggleTask(location.id, task.id)}
                         >
                           <div className="flex-shrink-0 mt-0.5">
@@ -324,9 +316,8 @@ const PlanDigitalChecklist = () => {
                             <span className="text-xs font-semibold text-blue-600 mb-1 block">
                               {task.id}.
                             </span>
-                            <p className={`text-slate-700 leading-relaxed ${
-                              task.completed ? 'line-through text-slate-500' : ''
-                            }`}>
+                            <p className={`text-slate-700 leading-relaxed ${task.completed ? 'line-through text-slate-500' : ''
+                              }`}>
                               {task.text}
                             </p>
                           </div>
