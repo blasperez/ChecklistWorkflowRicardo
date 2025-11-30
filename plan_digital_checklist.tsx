@@ -4,7 +4,14 @@ import { Check, Circle, ChevronDown, ChevronRight, RefreshCw } from 'lucide-reac
 import { initializeApp } from 'firebase/app';
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
 
-import { firebaseConfig } from './firebase-config';
+const firebaseConfig = {
+  apiKey: "AIzaSyCNsx_lDzNZz4-XXNBCL3l9LvzTKvN8N0c",
+  authDomain: "spotifylyricstranslator.firebaseapp.com",
+  projectId: "spotifylyricstranslator",
+  storageBucket: "spotifylyricstranslator.firebasestorage.app",
+  messagingSenderId: "459157844682",
+  appId: "1:459157844682:web:5f2adf8d72f0e622bffa33"
+};
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 // FIN BLOQUE FIREBASE
@@ -298,8 +305,8 @@ const PlanDigitalChecklist = () => {
                         <div
                           key={task.id}
                           className={`flex items-start gap-3 p-4 rounded-lg transition-all cursor-pointer ${task.completed
-                              ? 'bg-green-50 border-2 border-green-200'
-                              : 'bg-white border-2 border-slate-200 hover:border-blue-300 hover:shadow-sm'
+                            ? 'bg-green-50 border-2 border-green-200'
+                            : 'bg-white border-2 border-slate-200 hover:border-blue-300 hover:shadow-sm'
                             }`}
                           onClick={() => toggleTask(location.id, task.id)}
                         >
